@@ -1,6 +1,7 @@
-# USGS Earthquake Data
+# Earthquake Distribution
 
 ## Project Overview
+
 
 ## Technology Used
 
