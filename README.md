@@ -7,6 +7,7 @@
 - JavaScript
 - HTML
 - CSS
--
--
+- Leaflet.js
+- D3.js
+- MapBox API
 
