@@ -7,16 +7,25 @@ d3.json(geojsonURL, function(data){
 function createMap(earthquakes) {
 
     // Create the tile layer that will be the background of our map
-    var lightmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
-        attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-        maxZoom: 18,
-        id: "mapbox.light",
-        accessToken: API_KEY
-    });
+    mapboxgl.accessToken = API_KEY;
 
-    // Create a baseMaps object to hold the lightmap layer
+    var darkmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+      attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+      maxZoom: 18,
+      id: "mapbox.dark",
+      accessToken: API_KEY
+    });
+  
+    // var darkmap = new mapboxgl.Map({
+    //   container: 'map',
+    //   style: 'mapbox://styles/mapbox/dark-v10', // stylesheet location
+    //   center: [-115.1398,36.1699], // starting position [lng, lat]
+    //   zoom: 4 // starting zoom
+    // });
+
+    // Create a baseMaps object to hold the darkmap layer
     var baseMaps = {
-        "Light Map": lightmap
+        "Dark Map": darkmap
     };
 
     // Create an overlayMaps object to hold the earthquakes layer
@@ -28,7 +37,7 @@ function createMap(earthquakes) {
     var map = L.map("map", {
         center: [36.1699, -115.1398],
         zoom: 5,
-        layers: [lightmap, earthquakes]
+        layers: [darkmap, earthquakes]
     });
 
     // Create a layer control, pass in the baseMaps and overlayMaps. Add the layer control to the map
